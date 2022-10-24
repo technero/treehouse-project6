@@ -6,6 +6,7 @@ const missed_guesses = '';
 for (let i = 0; i > missed_guesses.length; i++) {
     if (missed_guesses === 5) {
         console.log = ("you are loser ");
-
     };
 };
+
+const phrases = ["L", " M ", " A", " E", " K"];
