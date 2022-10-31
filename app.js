@@ -44,3 +44,18 @@ function addPhraseToDisplay(arr) {
     };
 };
 addPhraseToDisplay(randomPhrase);
+
+function checkLetter(button) {
+
+    let li = document.querySelectorAll("li");
+    let match;
+
+    for (let i = 0; i < li.length; i++) {
+        if (button.textContent === li[i].textContent) {
+            li.className = "show";
+            match = button.textContent;
+        }
+    };
+    return match;
+
+};
