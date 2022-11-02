@@ -52,7 +52,7 @@ function checkLetter(button) {
 
     for (let i = 0; i < li.length; i++) {
         if (button.textContent === li[i].textContent.toLocaleLowerCase()) {
-            li[i].className = "show";
+            li[i].classList.add("show");
             match = button.textContent;
         }
     };
@@ -66,8 +66,24 @@ qwerty.addEventListener("click", (e) => {
         let letter = checkLetter(e.target);
         if (letter === "") {
             document.getElementsByClassName("tries")[missed_guesses].style.display = "none";
-            console.log(document.getElementsByClassName("tries")[missed_guesses]);
             missed_guesses++;
         }
+        checkWin();
     }
 });
+
+function checkWin() {
+    let letter = document.querySelectorAll(".letter");
+    let show = document.querySelectorAll(".show");
+    if (letter.length === show.length) {
+        overlay.className = "win";
+        overlay.querySelector(".title").textContent = "You Won!";
+        overlay.style.display = "flex";
+    }
+    if (missed_guesses > 4) {
+
+        overlay.className = "lose";
+        overlay.querySelector(".title").textContent = "Try Again!";
+        overlay.style.display = "flex";
+    }
+};
