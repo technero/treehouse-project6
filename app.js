@@ -3,7 +3,7 @@ const phrase = document.getElementById("phrase");
 const btnReset = document.querySelector(".btn__reset");
 const overlay = document.getElementById("overlay");
 
-const missed_guesses = 0;
+let missed_guesses = 0;
 
 const phrases = ["I love JS", "My Name is Nermeen", "I am a coder", "I try to learn", "Coding is fun"];
 btnReset.addEventListener("click", () => {
@@ -48,14 +48,26 @@ addPhraseToDisplay(randomPhrase);
 function checkLetter(button) {
 
     let li = document.querySelectorAll("li");
-    let match;
+    let match = "";
 
     for (let i = 0; i < li.length; i++) {
-        if (button.textContent === li[i].textContent) {
-            li.className = "show";
+        if (button.textContent === li[i].textContent.toLocaleLowerCase()) {
+            li[i].className = "show";
             match = button.textContent;
         }
     };
     return match;
-
 };
+
+qwerty.addEventListener("click", (e) => {
+    if (e.target.tagName.toLowerCase() === "button" &&
+        e.target.className !== "chosen") {
+        e.target.className = "chosen";
+        let letter = checkLetter(e.target);
+        if (letter === "") {
+            document.getElementsByClassName("tries")[missed_guesses].style.display = "none";
+            console.log(document.getElementsByClassName("tries")[missed_guesses]);
+            missed_guesses++;
+        }
+    }
+});
