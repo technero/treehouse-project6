@@ -58,6 +58,8 @@ function checkLetter(button) {
         if (button.textContent === li[i].textContent.toLocaleLowerCase()) {
             li[i].classList.add("show");
             match = button.textContent;
+            li[i].style.transition = "1s";
+
         }
     };
     return match;
