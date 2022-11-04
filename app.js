@@ -31,10 +31,13 @@ let randomPhrase = getRandomPhraseAsArray(phrases);
  * @param {Array} arr [' ', 'M', ' '] 
  */
 function addPhraseToDisplay(arr) {
+    const ul = document.getElementsByTagName("ul")[0];
+    while (ul.firstChild) {
+        ul.removeChild(ul.firstChild);
+    }
     for (let i = 0; i < arr.length; i++) {
         let li = document.createElement("li");
         li.textContent = arr[i];
-        const ul = document.getElementsByTagName("ul")[0];
         ul.appendChild(li);
         if (arr[i] === " ") {
             li.className = "space";
@@ -46,7 +49,6 @@ function addPhraseToDisplay(arr) {
 addPhraseToDisplay(randomPhrase);
 
 function checkLetter(button) {
-
     let li = document.querySelectorAll("li");
     let match = "";
 
@@ -65,10 +67,11 @@ qwerty.addEventListener("click", (e) => {
         e.target.className = "chosen";
         let letter = checkLetter(e.target);
         if (letter === "") {
-            document.getElementsByClassName("tries")[missed_guesses].style.display = "none";
+            document.getElementsByTagName("img")[missed_guesses].src = "images/lostHeart.png";
             missed_guesses++;
         }
         checkWin();
+
     }
 });
 
@@ -86,4 +89,24 @@ function checkWin() {
         overlay.querySelector(".title").textContent = "Try Again!";
         overlay.style.display = "flex";
     }
+
 };
+
+btnReset.addEventListener("click", () => {
+    randomPhrase = getRandomPhraseAsArray(phrases);
+    addPhraseToDisplay(randomPhrase);
+    missed_guesses = 0;
+
+    let chosenButtons = document.querySelectorAll(".chosen");
+    for (let i = 0; i < chosenButtons.length; i++) {
+
+        chosenButtons[i].classList.remove("chosen");
+    };
+    let imgs = document.getElementsByTagName("img")[0];
+    for (let i = 0; i < imgs.length; i++) {
+
+        imgs[missed_guesses].src = "images/liveHeart.png";
+    };
+
+})
+
