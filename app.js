@@ -45,8 +45,10 @@ function addPhraseToDisplay(arr) {
             li.className = "letter";
         }
     };
+
 };
 addPhraseToDisplay(randomPhrase);
+
 
 function checkLetter(button) {
     let li = document.querySelectorAll("li");
@@ -102,11 +104,14 @@ btnReset.addEventListener("click", () => {
 
         chosenButtons[i].classList.remove("chosen");
     };
-    let imgs = document.getElementsByTagName("img")[0];
+
+    let imgs = document.getElementsByTagName("img");
+
     for (let i = 0; i < imgs.length; i++) {
 
-        imgs[missed_guesses].src = "images/liveHeart.png";
+        imgs[i].src = "images/liveHeart.png";
     };
 
 })
+
 
